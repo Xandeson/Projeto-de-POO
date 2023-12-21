@@ -22,7 +22,7 @@ class Labirinto:
         self.parede
         
     def desenhar_labirinto(self):
-       
+       pass
         
     def desenhar_placar(self):
         pygame.draw.rect(tela, (255, 102, 0), (0, 0, 700, 100))
