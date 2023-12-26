@@ -29,6 +29,8 @@ class Personagem:
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
+        self.x = 80
+        self.y = 120
         self.sprite = []
         self.sprite.append(pygame.image.load('sprite_player/front_1.png'))
         self.sprite.append(pygame.image.load('sprite_player/front_2.png'))
@@ -40,7 +42,7 @@ class Player(pygame.sprite.Sprite):
         self.sprit_atual = 0
         self.image = self.sprite[self.sprit_atual]
         self.rect = self.image.get_rect()
-        self.rect.topleft = 80, 120
+        self.rect.topleft = self.x, self.y
         self.image = pygame.transform.scale2x(self.image)
     
     def update(self):
@@ -48,7 +50,21 @@ class Player(pygame.sprite.Sprite):
         if self.sprit_atual >= len(self.sprite):
             self.sprit_atual = 0
         self.image = self.sprite[int(self.sprit_atual)]
-        self.image = pygame.transform.scale(self.image, (27*2,26*2)) 
+        self.image = pygame.transform.scale2x(self.image) 
+        
+    def movimento(self):
+        self.image = pygame.transform.scale2x(self.image)
+        key = pygame.key.get_pressed()
+        dist = 5 # distance moved in 1 frame, try changing it to 5
+        if key[pygame.K_DOWN]: # down key
+            self.y += dist # move down
+        elif key[pygame.K_UP]: # up key
+            self.y -= dist # move up
+        if key[pygame.K_RIGHT]: # right key
+            self.x += dist # move right
+        elif key[pygame.K_LEFT]: # left key
+            self.x -= dist # move left
+        
 
  
     #def movimento(self):
