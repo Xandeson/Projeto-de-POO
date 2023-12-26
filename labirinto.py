@@ -13,7 +13,6 @@ tela = pygame.display.set_mode((tela_altura, tela_largura))
 
 labirinto_img = pygame.transform.scale(pygame.image.load('img/labirinto.png'), (tela_altura, tela_largura-100))
 
-
 pygame.init()
 pygame.display.set_caption('Super Bomberman')
 
@@ -35,30 +34,24 @@ class Labirinto:
     def adicionar_blocos(self):
         pass
 labirinto = Labirinto()
-
-play_sprite = pygame.sprite.Group()
-jogador = Player()
-play_sprite.add(jogador)
-
-
+personagem = Player()
+boneco = personagem.image
 
 x = 400
 y = 330
 mover = 5
 relogio = pygame.time.Clock()
 while True:
-    relogio.tick(60)
+    relogio.tick(6)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             exit()
-        comando = pygame.key.get_pressed()
-        
-        if comando[pygame.K_UP]:
-             x -= mover
-       
-    labirinto.desenhar_labirinto()
-    play_sprite.draw(tela,(x,y))
-    play_sprite.update()
-            
+    
+    personagem.movimento()
+    labirinto.desenhar_labirinto() 
+    
+    tela.blit(boneco, (personagem.x, personagem.y))
+    
     pygame.display.update()
+    
