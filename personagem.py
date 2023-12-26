@@ -44,7 +44,7 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale2x(self.image)
     
     def update(self):
-        self.sprit_atual += 0.1
+        self.sprit_atual += 1
         if self.sprit_atual >= len(self.sprite):
             self.sprit_atual = 0
         self.image = self.sprite[int(self.sprit_atual)]

@@ -44,6 +44,7 @@ play_sprite.add(jogador)
 
 x = 400
 y = 330
+tu = (x,y)
 mover = 5
 relogio = pygame.time.Clock()
 while True:
@@ -53,12 +54,13 @@ while True:
             pygame.quit()
             exit()
         comando = pygame.key.get_pressed()
+        tela.blit(play_sprite, tu)
         
         if comando[pygame.K_UP]:
-             x -= mover
-       
+             tu.x -= mover
+             tela.blit(play_sprite, tu)
     labirinto.desenhar_labirinto()
-    play_sprite.draw(tela,(x,y))
+    
     play_sprite.update()
             
     pygame.display.update()
