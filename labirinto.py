@@ -1,5 +1,6 @@
 import pygame
 import os
+from personagem import Player
 
 from pygame.locals import *
 from sys import exit
@@ -33,13 +34,21 @@ class Labirinto:
     def adicionar_blocos(self):
         pass
 labirinto = Labirinto()
-        
+
+play_sprite = pygame.sprite.Group()
+jogador = Player()
+play_sprite.add(jogador)
+
+relogio = pygame.time.Clock()
 while True:
+    relogio.tick(60)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             exit()
     
     labirinto.desenhar_labirinto()
+    play_sprite.draw(tela)
+    play_sprite.update()
             
     pygame.display.update()
