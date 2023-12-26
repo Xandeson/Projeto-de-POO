@@ -25,7 +25,9 @@ class Labirinto:
         self.pos_x = 0
         self.pos_y = 100
         
-    #git #self.desenhar_placar()
+    def desenhar_labirinto(self):
+        tela.blit(labirinto_img, (self.pos_x, self.pos_y))
+        self.desenhar_placar()
         
     def desenhar_placar(self):
         pygame.draw.rect(tela, (255, 102, 0), (0, 0, 700, 100))
@@ -41,8 +43,8 @@ play_sprite.add(jogador)
 
 pos_x = 0
 pos_y = 100
-x = 0
-y = 0
+x = 400
+y = 330
 mover = 5
 relogio = pygame.time.Clock()
 while True:
@@ -56,9 +58,8 @@ while True:
         if comando[pygame.K_UP]:
              x -= mover
        
-    
-    tela.blit(labirinto_img, (pos_x, pos_y))
-    tela.blit(play_sprite, (x,y))
+    labirinto.desenhar_labirinto()
+    play_sprite.draw(tela)
     play_sprite.update()
             
     pygame.display.update()
