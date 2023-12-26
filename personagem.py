@@ -41,7 +41,7 @@ class Player(pygame.sprite.Sprite):
         self.image = self.sprite[self.sprit_atual]
         self.rect = self.image.get_rect()
         self.rect.topleft = 80, 120
-        self.image = pygame.transform.scale(self.image, (27*2,26*2))
+        self.image = pygame.transform.scale2x(self.image)
     
     def update(self):
         self.sprit_atual += 0.1

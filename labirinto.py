@@ -41,8 +41,7 @@ jogador = Player()
 play_sprite.add(jogador)
 
 
-pos_x = 0
-pos_y = 100
+
 x = 400
 y = 330
 mover = 5
@@ -59,7 +58,7 @@ while True:
              x -= mover
        
     labirinto.desenhar_labirinto()
-    play_sprite.draw(tela)
+    play_sprite.draw(tela,(x,y))
     play_sprite.update()
             
     pygame.display.update()
