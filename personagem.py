@@ -48,4 +48,7 @@ class Player(pygame.sprite.Sprite):
         if self.sprit_atual >= len(self.sprite):
             self.sprit_atual = 0
         self.image = self.sprite[int(self.sprit_atual)]
-        self.image = pygame.transform.scale(self.image, (27*2,26*2))
+        self.image = pygame.transform.scale(self.image, (27*2,26*2)) 
+
+ 
+    #def movimento(self):

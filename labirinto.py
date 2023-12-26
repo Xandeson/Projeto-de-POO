@@ -1,5 +1,6 @@
 import pygame
 import os
+from sys import exit
 from personagem import Player
 
 from pygame.locals import *
@@ -24,9 +25,7 @@ class Labirinto:
         self.pos_x = 0
         self.pos_y = 100
         
-    def desenhar_labirinto(self):
-        tela.blit(labirinto_img, (self.pos_x, self.pos_y))
-        self.desenhar_placar()
+    #git #self.desenhar_placar()
         
     def desenhar_placar(self):
         pygame.draw.rect(tela, (255, 102, 0), (0, 0, 700, 100))
@@ -39,6 +38,12 @@ play_sprite = pygame.sprite.Group()
 jogador = Player()
 play_sprite.add(jogador)
 
+
+pos_x = 0
+pos_y = 100
+x = 0
+y = 0
+mover = 5
 relogio = pygame.time.Clock()
 while True:
     relogio.tick(60)
@@ -46,9 +51,14 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             exit()
+        comando = pygame.key.get_pressed()
+        
+        if comando[pygame.K_UP]:
+             x -= mover
+       
     
-    labirinto.desenhar_labirinto()
-    play_sprite.draw(tela)
+    tela.blit(labirinto_img, (pos_x, pos_y))
+    tela.blit(play_sprite, (x,y))
     play_sprite.update()
             
     pygame.display.update()
