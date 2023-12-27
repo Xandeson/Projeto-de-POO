@@ -35,23 +35,19 @@ class Labirinto:
         pass
 labirinto = Labirinto()
 personagem = Player()
-boneco = personagem.image
 
-x = 400
-y = 330
-mover = 5
+
 relogio = pygame.time.Clock()
 while True:
-    relogio.tick(6)
+    relogio.tick(30)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             exit()
     
-    personagem.movimento()
     labirinto.desenhar_labirinto() 
-    
-    tela.blit(boneco, (personagem.x, personagem.y))
+    personagem.movimento()
+    tela.blit(personagem.image, (personagem.x, personagem.y))
     
     pygame.display.update()
     
