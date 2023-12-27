@@ -1,1 +1,1 @@
-img/avatar_icon.png
+draw
