@@ -2,6 +2,7 @@ import pygame
 import os
 import time
 import csv
+from personagem import Player
 
 from pygame.locals import *
 from sys import exit
@@ -87,7 +88,8 @@ with open(f'level{lvl}_data.csv', newline='') as csvfile:
             world_data[x][y] = int(tile)
             
 world = World() 
-world.process_data(world_data)        
+world.process_data(world_data)
+personagem = Player()      
 
 while True:
     for event in pygame.event.get():
@@ -97,6 +99,9 @@ while True:
     
     #labirinto.desenhar_labirinto()
     world.draw()
+    
+    personagem.movimento()
+    tela.blit(personagem.image, (personagem.x, personagem.y))
     
     clock = pygame.time.Clock()
             
