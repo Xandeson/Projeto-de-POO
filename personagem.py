@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import *
 from sys import exit
 
+
 class Personagem:
     _itens = []
     def __init__(self, nome, posicao,vida, quantidade_Bomba):
@@ -27,10 +28,11 @@ class Personagem:
     
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, list):
         pygame.sprite.Sprite.__init__(self)
-        self.x = 80
-        self.y = 120
+        self.list = []
+        self.x = 50
+        self.y = 200
         self.sprite = []
         self.sprite.append(pygame.image.load('sprite_player/front_1.png'))
         self.sprite.append(pygame.image.load('sprite_player/front_2.png'))
@@ -43,8 +45,10 @@ class Player(pygame.sprite.Sprite):
         self.image = self.sprite[self.sprit_atual]
         self.update(0)
         self.rect = self.image.get_rect()
-        self.rect.topleft = self.x, self.y
+        self.rect.center = self.x, self.y
         self.image = pygame.transform.scale(self.image,(27*2,26*2))
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
     
     def update(self,id):
         self.sprit_atual += 0.25
@@ -56,7 +60,12 @@ class Player(pygame.sprite.Sprite):
         
     def movimento(self):
         key = pygame.key.get_pressed()
-        dist = 5 # distance moved in 1 frame, try changing it to 5
+        for tile in self.list:
+            if tile[1].colliderect(self.rect.x + self.x, self.y, self.width, self.height):
+                dist = 0
+            if tile[1].colliderect(self.rect.x, self.y + self.y, self.width, self.height):
+                dist = 0
+        dist = 10 # distance moved in 1 frame, try changing it to 5
         if  key[pygame.K_DOWN]: # down key
             self.y += dist # move down
             self.update(0)
@@ -66,7 +75,7 @@ class Player(pygame.sprite.Sprite):
             self.x += dist # move right
         elif key[pygame.K_LEFT]: # left key
             self.x -= dist # move left
+            
         
-
- 
-    #def movimento(self):
+            
+    

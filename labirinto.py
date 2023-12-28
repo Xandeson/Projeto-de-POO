@@ -89,9 +89,11 @@ with open(f'level{lvl}_data.csv', newline='') as csvfile:
             
 world = World() 
 world.process_data(world_data)
-personagem = Player()      
+personagem = Player(world.obstacle_list)      
 
+relogio = pygame.time.Clock()
 while True:
+    relogio.tick(60)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -117,3 +119,5 @@ while True:
     pygame.display.flip()
 
     clock.tick(1)
+    
+    
