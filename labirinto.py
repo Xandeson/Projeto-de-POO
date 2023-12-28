@@ -3,6 +3,7 @@ import os
 import time
 import csv
 from personagem import Player
+from porta import Porta
 
 from pygame.locals import *
 from sys import exit
@@ -16,7 +17,7 @@ tempo_atual = tempo_inicial
 linhas = 16
 colunas = 21
 TILE_SIZE = tela_altura // linhas
-TILE_TYPES = 13
+TILE_TYPES = 6
 lvl = 1
 
 tela = pygame.display.set_mode((tela_altura, tela_largura))
@@ -31,19 +32,16 @@ for x in range(TILE_TYPES):
 	img = pygame.transform.scale(img, (TILE_SIZE, TILE_SIZE))
 	img_list.append(img)
 
-save_img = pygame.image.load('img/save_btn.png').convert_alpha()
-load_img = pygame.image.load('img/load_btn.png').convert_alpha()
 
-labirinto_img = pygame.transform.scale(pygame.image.load('img/labirinto.png'), (tela_altura, tela_largura-100))
 icon_bomberman = pygame.transform.scale(pygame.image.load('img/avatar_icon.png'), (25, 45))
 icon_inimigo = pygame.transform.scale(pygame.image.load('img/enemy_icon.png'), (25, 60))
-
 
 pygame.display.set_caption('Super Bomberman')
 
 class World():
     def __init__(self):
         self.obstacle_list = []
+        self.porta = 0
         
     def process_data(self, data):
         for y, row in enumerate(data):
@@ -54,8 +52,10 @@ class World():
                     img_rect.x = x * TILE_SIZE
                     img_rect.y = y * TILE_SIZE
                     tile_data = (img, img_rect)
-                    if tile >= 0 and tile <= 5:
+                    if tile >= 0 and tile <= 4:
                         self.obstacle_list.append(tile_data)
+                    if tile == 5:
+                        self.porta = Porta(img, x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE)
     
     def draw(self):
         tela.fill((17, 123, 48))
@@ -74,7 +74,7 @@ class World():
         pygame.draw.rect(tela, (255, 255, 255), (548, 75, 60, 40), 2)
         tela.blit(icon_bomberman, (140, 68))
         tela.blit(icon_inimigo, (515, 65))
-
+        
 def relogio():
     clock = pygame.time.Clock()
     tempo_atual = max(0, tempo_atual - 1)
@@ -100,7 +100,7 @@ with open(f'level{lvl}_data.csv', newline='') as csvfile:
             
 world = World() 
 world.process_data(world_data)
-personagem = Player(world.obstacle_list)      
+personagem = Player(world.obstacle_list, world.porta)      
 
 relogio = pygame.time.Clock()
 

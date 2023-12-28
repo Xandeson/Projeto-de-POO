@@ -28,9 +28,9 @@ class Personagem:
     
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, list):
+    def __init__(self, list, porta):
         pygame.sprite.Sprite.__init__(self)
-        self.list = []
+        self.list = list
         self.x = 50
         self.y = 200
         self.sprite = []
@@ -45,10 +45,11 @@ class Player(pygame.sprite.Sprite):
         self.image = self.sprite[self.sprit_atual]
         self.update(0)
         self.rect = self.image.get_rect()
-        self.rect.center = self.x, self.y
+        self.rect.topleft = self.x, self.y
         self.image = pygame.transform.scale(self.image,(27*2,26*2))
-        self.width = self.image.get_width()
-        self.height = self.image.get_height()
+        self.width = self.rect.width
+        self.height = self.rect.height
+        self.porta = porta
     
     def update(self,id):
         self.sprit_atual += 0.25
@@ -60,23 +61,28 @@ class Player(pygame.sprite.Sprite):
         
     def movimento(self):
         key = pygame.key.get_pressed()
-        for tile in self.list:
-            if tile[1].colliderect(self.rect.x + self.x, self.y, self.width, self.height):
-                dist = 0
-            if tile[1].colliderect(self.rect.x, self.y + self.y, self.width, self.height):
-                dist = 0
-            
-        dist = 10 # distance moved in 1 frame, try changing it to 5
+        dist = 10
+        dx = 0
+        dy = 0# distance moved in 1 frame, try changing it to 5
         if  key[pygame.K_DOWN]: # down key
-            self.y += dist # move down
+            dy += dist # move down
             self.update(0)
         elif key[pygame.K_UP]: # up key
-            self.y -= dist # move up
+            dy -= dist # move up
         if key[pygame.K_RIGHT]: # right key
-            self.x += dist # move right
+            dx += dist # move right
         elif key[pygame.K_LEFT]: # left key
-            self.x -= dist # move left
+            dx -= dist # move left
             
+        for tile in self.list:
+            if tile[1].colliderect(self.rect.x + dx, self.y, 0, 0):
+                dx = 0
+            if tile[1].colliderect(self.rect.x, self.y + dy, 0, 0):
+                dy = 0
+            
+        self.rect.x += dx
+        self.rect.y += dy
         
-            
-    
+        
+        #if pygame.sprite.spritecollide(self, porta, False):
+         #   self.porta.aberta = True
