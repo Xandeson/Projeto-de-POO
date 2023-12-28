@@ -20,9 +20,9 @@ pygame.display.set_caption('Level Editor')
 
 #define game variables
 ROWS = 16
-MAX_COLS = 19
+MAX_COLS = 21
 TILE_SIZE = SCREEN_HEIGHT // ROWS
-TILE_TYPES = 5
+TILE_TYPES = 13
 level = 0
 current_tile = 0
 scroll_left = False
@@ -56,9 +56,11 @@ for row in range(ROWS):
 
 #create ground
 for tile in range(0, MAX_COLS):
-	world_data[ROWS - 1][tile] = 0
+	world_data[ROWS -1][tile] = 0
 
-
+def draw_bg():
+    screen.fill((17, 123, 48))
+    
 #function for outputting text onto the screen
 def draw_text(text, font, text_col, x, y):
 	img = font.render(text, True, text_col)
@@ -105,7 +107,8 @@ run = True
 while run:
 
 	clock.tick(FPS)
- 
+	
+	draw_bg()
 	draw_grid()
 	draw_world()
 

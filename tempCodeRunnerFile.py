@@ -1,1 +1,1 @@
-draw
+world.process_data(world_data)   
