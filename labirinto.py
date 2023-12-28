@@ -75,6 +75,17 @@ class World():
         tela.blit(icon_bomberman, (140, 68))
         tela.blit(icon_inimigo, (515, 65))
 
+def relogio():
+    clock = pygame.time.Clock()
+    tempo_atual = max(0, tempo_atual - 1)
+
+    minutos = tempo_atual // 60
+    segundos = tempo_atual % 60
+
+    texto = fonte.render(f"{minutos:02}:{segundos:02}", True, (255, 255, 255))
+    texto_retangulo = texto.get_rect(center=(385, 95))
+    tela.blit(texto, texto_retangulo)
+    clock.tick(1)
 
 world_data = []
 for row in range(linhas):
@@ -92,32 +103,20 @@ world.process_data(world_data)
 personagem = Player(world.obstacle_list)      
 
 relogio = pygame.time.Clock()
+
+
 while True:
-    relogio.tick(60)
+    relogio.tick(20)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             exit()
-    
-    #labirinto.desenhar_labirinto()
+            
     world.draw()
     
     personagem.movimento()
     tela.blit(personagem.image, (personagem.x, personagem.y))
     
-    clock = pygame.time.Clock()
-            
-    tempo_atual = max(0, tempo_atual - 1)
-
-    minutos = tempo_atual // 60
-    segundos = tempo_atual % 60
-
-    texto = fonte.render(f"{minutos:02}:{segundos:02}", True, (255, 255, 255))
-    texto_retangulo = texto.get_rect(center=(385, 95))
-    tela.blit(texto, texto_retangulo)
-
+    #relogio()
+    
     pygame.display.flip()
-
-    clock.tick(1)
-    
-    

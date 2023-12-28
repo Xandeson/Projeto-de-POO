@@ -65,6 +65,7 @@ class Player(pygame.sprite.Sprite):
                 dist = 0
             if tile[1].colliderect(self.rect.x, self.y + self.y, self.width, self.height):
                 dist = 0
+            
         dist = 10 # distance moved in 1 frame, try changing it to 5
         if  key[pygame.K_DOWN]: # down key
             self.y += dist # move down
