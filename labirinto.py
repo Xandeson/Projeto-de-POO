@@ -1,6 +1,7 @@
 import pygame
 import os
 from personagem import Player
+from bomba import Bomba
 from pygame.locals import *
 from sys import exit
 
@@ -31,8 +32,11 @@ class Labirinto:
         
     def adicionar_blocos(self):
         pass
+
 labirinto = Labirinto()
 personagem = Player()
+bomb = Bomba()
+
 
 
 relogio = pygame.time.Clock()
