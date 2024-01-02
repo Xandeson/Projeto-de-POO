@@ -100,21 +100,6 @@ class World():
     def get_porta(self):
         return self._porta
     
-def relogio():
-    """
-    Classe que representa o relógio do jogo para fazer o cronômetro
-    """
-    clock = pygame.time.Clock()
-    tempo_atual = max(0, tempo_atual - 1)
-
-    minutos = tempo_atual // 60
-    segundos = tempo_atual % 60
-
-    texto = fonte.render(f"{minutos:02}:{segundos:02}", True, (255, 255, 255))
-    texto_retangulo = texto.get_rect(center=(385, 95))
-    tela.blit(texto, texto_retangulo)
-    clock.tick(1)
-
 world_data = []
 for row in range(linhas):
     r = [-1] * colunas
@@ -145,6 +130,5 @@ while True:
     personagem.movimento()
     tela.blit(personagem.get_image(), (personagem.get_x(), personagem.get_y()))
     
-    #relogio()
     
     pygame.display.flip()

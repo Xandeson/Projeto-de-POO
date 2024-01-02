@@ -7,6 +7,8 @@ pygame.init()
 
 clock = pygame.time.Clock()
 FPS = 60
+""" Cresitos: https://github.com/russs123/LevelEditor
+	Termos de uso no arquivo LICENSE."""
 
 #game window
 SCREEN_WIDTH = 800

@@ -1,1 +1,1 @@
-world.obstacle_list
+, Sprite_player
