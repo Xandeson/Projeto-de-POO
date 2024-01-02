@@ -86,8 +86,6 @@ class World():
         pygame.draw.rect(tela, (255, 0, 0), (0, 0, 800, 150), 4)
         pygame.draw.rect(tela, (0, 0, 0), (170, 75, 60, 40))
         pygame.draw.rect(tela, (255, 255, 255), (170, 75, 60, 40), 2)
-        pygame.draw.rect(tela, (0, 0, 0), (355, 75, 60, 40))
-        pygame.draw.rect(tela, (255, 255, 255), (355, 75, 60, 40), 2)
         pygame.draw.rect(tela, (0, 0, 0), (548, 75, 60, 40))
         pygame.draw.rect(tela, (255, 255, 255), (548, 75, 60, 40), 2)
         tela.blit(icon_bomberman, (140, 68))

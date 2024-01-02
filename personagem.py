@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite, SpritePlayerMixin):
         self._image = self._sprite[self._sprit_atual]
         self._rect = self._image.get_rect()
         self._rect.topleft = self._x, self._y
-        self._image = pygame.transform.scale(self._image,(27*2,26*2))
+        self._image = pygame.transform.scale2x(self._image)
         self._width = self._rect.width
         self._height = self._rect.height
         self._porta = porta
@@ -48,7 +48,7 @@ class Player(pygame.sprite.Sprite, SpritePlayerMixin):
         if self._sprit_atual >= 7:
             self._sprit_atual = id
         self._image = self._sprite[int(self._sprit_atual)]
-        self._image = pygame.transform.scale(self._image,(27*2, 26*2)) 
+        self._image = pygame.transform.scale2x(self._image) 
         
         
     def movimento(self):
