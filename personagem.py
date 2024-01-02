@@ -1,8 +1,9 @@
 from typing import Any
 import pygame
 from pygame.locals import *
+from mixins import SpritePlayerMixin
 
-class Player(pygame.sprite.Sprite):
+class Player(pygame.sprite.Sprite, SpritePlayerMixin):
     def __init__(self, lista, porta):
         """
         classe que representa o personagem do boberman
@@ -12,6 +13,7 @@ class Player(pygame.sprite.Sprite):
             porta(Porta): objeto que representa a porta do jogo
         """
         pygame.sprite.Sprite.__init__(self)
+        SpritePlayerMixin.__init__(self)
         self._vida = 3
         self._quantidade_Bomba = 3
         self._velocidade = 3
@@ -126,12 +128,6 @@ class Player(pygame.sprite.Sprite):
 
     def set_sprite_atual(self, valor):
         self._sprit_atual = valor
-
-    def get_image(self):
-        return self._image
-
-    def set_image(self, valor):
-        self._image = valor
 
     def get_rect(self):
         return self._rect
