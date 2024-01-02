@@ -4,11 +4,13 @@ from pygame.locals import *
 from sys import exit
 
 class Bomba(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self,):
         pygame.sprite.Sprite.__init__(self)    
         self.posicao_x = 80
         self.posicao_y = 120
         #self.explodir = False
+        self.tempo_explosao = 5
+        self.raio_explosao = 3
         self.sprite = []
         self.sprite.append(pygame.image.load('sprite_bomba/bomba_0.png'))
         self.sprite.append(pygame.image.load('sprite_bomba/bomba_1.png'))

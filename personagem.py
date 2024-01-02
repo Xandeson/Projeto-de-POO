@@ -9,6 +9,7 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.x = 80
         self.y = 120
+        self.bombas = []
         self.sprite = []
         self.sprite.append(pygame.image.load('sprite_player/front_1.png'))
         self.sprite.append(pygame.image.load('sprite_player/front_2.png'))
@@ -54,7 +55,15 @@ class Player(pygame.sprite.Sprite):
         self.image = self.sprite[int(self.sprit_atual)]
         self.image = pygame.transform.scale2x(self.image) 
         
-        
+    def colocar_bomba(self, x, y, tempo_explosao, raio_explosao):
+        nova_bomba = Bomba(x, y, tempo_explosao, raio_explosao)
+        self.bombas.append(nova_bomba)
+
+    def detonar_bomba(self, index):
+        if 0 <= index < len(self.bombas):
+            bomba = self.bombas.pop(index)
+            bomba.explodir()
+            
     def movimento(self):
         key = pygame.key.get_pressed()
         dist = 5 # distance moved in 1 frame, try changing it to 5
