@@ -1,1 +1,1 @@
-TILE
+world.obstacle_list

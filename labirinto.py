@@ -39,11 +39,23 @@ icon_inimigo = pygame.transform.scale(pygame.image.load('img/enemy_icon.png'), (
 pygame.display.set_caption('Super Bomberman')
 
 class World():
+    """
+    Classe que cria o labirinto
+    """
     def __init__(self):
-        self.obstacle_list = []
-        self.porta = 0
-        
+        """
+        inicializa a intância da classe Wolrd
+        """
+        self._obstacle_list = []
+        self._porta = 0
+
     def process_data(self, data):
+        """
+        Processa os dados do mundo
+
+        Argumento:
+            data (list): Lista contendo os dados do mundo
+        """
         for y, row in enumerate(data):
             for x, tile in enumerate(row):
                 if tile >= 0:
@@ -53,17 +65,23 @@ class World():
                     img_rect.y = y * TILE_SIZE
                     tile_data = (img, img_rect)
                     if tile >= 0 and tile <= 4:
-                        self.obstacle_list.append(tile_data)
+                        self._obstacle_list.append(tile_data)
                     if tile == 5:
-                        self.porta = Porta(img, x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE)
+                        self._porta = Porta(img, x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE)
     
     def draw(self):
+        """
+        Desenha o backgorund, o placar e o labirinto na tela
+        """
         tela.fill((17, 123, 48))
-        self.desenhar_placar()
-        for tile in self.obstacle_list:
+        self._desenhar_placar()
+        for tile in self._obstacle_list:
             tela.blit(tile[0], tile[1])
     
-    def desenhar_placar(self):
+    def _desenhar_placar(self):
+        """
+        Desenha o placar na tela, este tem o placar, os icones do player e inimigo, e um relogio conômetro
+        """
         pygame.draw.rect(tela, (255, 69, 0), (0, 0, 800, 150))
         pygame.draw.rect(tela, (255, 0, 0), (0, 0, 800, 150), 4)
         pygame.draw.rect(tela, (0, 0, 0), (170, 75, 60, 40))
@@ -75,7 +93,17 @@ class World():
         tela.blit(icon_bomberman, (140, 68))
         tela.blit(icon_inimigo, (515, 65))
         
+        
+    def get_obstacle_list(self):
+        return self._obstacle_list
+
+    def get_porta(self):
+        return self._porta
+    
 def relogio():
+    """
+    Classe que representa o relógio do jogo para fazer o cronômetro
+    """
     clock = pygame.time.Clock()
     tempo_atual = max(0, tempo_atual - 1)
 
@@ -100,7 +128,7 @@ with open(f'level{lvl}_data.csv', newline='') as csvfile:
             
 world = World() 
 world.process_data(world_data)
-personagem = Player(world.obstacle_list, world.porta)      
+personagem = Player(world.get_obstacle_list(), world.get_porta())      
 
 relogio = pygame.time.Clock()
 
@@ -115,7 +143,7 @@ while True:
     world.draw()
     
     personagem.movimento()
-    tela.blit(personagem.image, (personagem.x, personagem.y))
+    tela.blit(personagem.get_image(), (personagem.get_x(), personagem.get_y()))
     
     #relogio()
     
