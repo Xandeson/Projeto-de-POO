@@ -1,9 +1,9 @@
 from typing import Any
 import pygame
 from pygame.locals import *
-from sys import exit
+from mixins import Sprite_player
 
-class Player(pygame.sprite.Sprite):
+class Player(pygame.sprite.Sprite, Sprite_player):
     def __init__(self, lista, porta):
         """
         classe que representa o personagem do boberman
@@ -19,14 +19,7 @@ class Player(pygame.sprite.Sprite):
         self._list = lista
         self._x = 50
         self._y = 200
-        self._sprite = []
-        self._sprite.append(pygame.image.load('sprite_player/front_1.png'))
-        self._sprite.append(pygame.image.load('sprite_player/front_2.png'))
-        self._sprite.append(pygame.image.load('sprite_player/front_3.png'))
-        self._sprite.append(pygame.image.load('sprite_player/front_4.png'))
-        self._sprite.append(pygame.image.load('sprite_player/front_5.png'))
-        self._sprite.append(pygame.image.load('sprite_player/front_6.png'))
-        self._sprite.append(pygame.image.load('sprite_player/front_7.png'))
+        self._sprite = self.sprites_K_dow
         self._sprit_atual = 0
         self._image = self._sprite[self._sprit_atual]
         self._rect = self._image.get_rect()
