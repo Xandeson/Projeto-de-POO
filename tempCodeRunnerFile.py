@@ -1,1 +1,1 @@
-img/avatar_icon.png
+, Sprite_player
